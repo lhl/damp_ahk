@@ -13,7 +13,7 @@ toggle_right = 0
 rbutton::
 toggle_right := !toggle_right
 if(toggle_right = 1) {
-  click ,right ,down
+  click, right, down
 } else{
   click, right, up
 }
@@ -21,12 +21,14 @@ return
 
 /* Shift Toggle - always sprint */
 toggle_shift = 0
-shift::
+~Shift::
 toggle_shift := !toggle_shift
-if(toggle_shift = 1) {
- send, {shift down}
-} else{
-  send, {shift up}
+if(GetKeyState("Shift", "P"])) {
+  if(toggle_shift = 1) {
+    send, {Shift Down}
+  } else{
+    send, {Shift Up}
+  }
 }
 return
 
