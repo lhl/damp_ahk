@@ -37,7 +37,7 @@ See also:
 SendMode Input        ; Generally more reliable, see http://www.autohotkey.com/docs/commands/SendMode.htm
 SetTitleMatchMode, 2  ; Make search title in #IfWinActive more flexible
 
-#IfWinActive Dragon Age Inquisition
+#IfWinActive Dragon Age: Inquisition
 
 /* RMB Toggle - freelook; see: http://www.autohotkey.com/board/topic/90938-right-mouse-toggle-help/ */
 toggle_right = 0
