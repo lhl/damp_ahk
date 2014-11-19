@@ -7,6 +7,11 @@ These tweaks should make DAI easier to control:
 * RMB toggles freelook
 * Shift toggles sprint
 
+TODO:
+* Mic Toggle
+* Overlays w/ status messages
+
+
 
 See also:
 * http://www.autohotkey.com/docs/Tutorial.htm
@@ -20,12 +25,16 @@ See also:
 * http://www.autohotkey.com/board/topic/90695-metro-2033-toggle-aim-hold-right-mouse-button/
 * http://stackoverflow.com/questions/15472404/autohotkey-on-right-mouse-click-get-a-keyboard-button-pressed-as-well
 
+Sound
 * http://www.autohotkey.com/docs/commands/SoundBeep.htm
 * http://www.autohotkey.com/docs/commands/SoundPlay.htm
 * http://www.autohotkey.com/board/topic/36109-setting-microphone-and-stereo-mix-using-soundset-function/
 * http://www.autohotkey.com/docs/commands/SoundSet.htm
 * http://www.autohotkey.com/board/topic/74440-problem-with-soundplay/
 * http://www.autohotkey.com/board/topic/79063-simple-script-that-plays-a-sound-when-button-is-pressed/
+
+Overlay
+http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-games-dx-89-fixed/
 
 */
 
