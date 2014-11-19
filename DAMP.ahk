@@ -38,14 +38,16 @@ http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-gam
 
 */
 
+#NoEnv                      ; Recommended for performance and compatibility with future AutoHotkey releases.
+#Persistent                 ; Keep the script running until ExitApp is called
+#SingleInstance FORCE       ; Reload on script relaunch
+#Warn                       ; Warn on errors
 
+SendMode Input              ; Recommended for new scripts due to its superior speed and reliability.
+SetTitleMatchMode, 2        ; Make search title in #IfWinActive more flexible
+SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
-#SingleInstance FORCE ; Reload on script relaunch
-#NoEnv                ; Don't check empty variables
-#Warn                 ; Warn on errors
-SendMode Input        ; Generally more reliable, see http://www.autohotkey.com/docs/commands/SendMode.htm
-SetTitleMatchMode, 2  ; Make search title in #IfWinActive more flexible
-
+/*** Only for DAI ***/
 #IfWinActive Dragon Age: Inquisition
 
 /* RMB Toggle - freelook; see: http://www.autohotkey.com/board/topic/90938-right-mouse-toggle-help/ */
@@ -71,6 +73,5 @@ if(GetKeyState("Shift", "P"])) {
   }
 }
 return
-
 
 #IfWinActive
