@@ -3,14 +3,17 @@
 Dragon Age Inquisition Multiplayer Key Bindings 
 ---
 You should map WASD (from WQSE to movement).
-These tweaks should make DAI easier to control:
+These tweaks should make DAI easier to control.
+
+What the script does:
 * RMB toggles freelook
 * Shift toggles sprint
+* Mic Toggle (Caveats)
 
 TODO:
-* Mic Toggle
 * Overlays w/ status messages
-
+* Disable Windows Key
+* Right Control Toggles Mute for your own Microphone
 
 
 See also:
@@ -34,44 +37,79 @@ Sound
 * http://www.autohotkey.com/board/topic/79063-simple-script-that-plays-a-sound-when-button-is-pressed/
 
 Overlay
-http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-games-dx-89-fixed/
+* http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-games-dx-89-fixed/
+* http://overlay-api.net/
+
+Debugging
+http://www.autohotkey.com/board/topic/59612-simple-debug-console-output/
+https://pyahk.readthedocs.org/en/latest/
 
 */
 
 #NoEnv                      ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Persistent                 ; Keep the script running until ExitApp is called
-#SingleInstance FORCE       ; Reload on script relaunch
-#Warn                       ; Warn on errors
+#SingleInstance Force       ; Reload on script relaunch
 
 SendMode Input              ; Recommended for new scripts due to its superior speed and reliability.
 SetTitleMatchMode, 2        ; Make search title in #IfWinActive more flexible
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
-/*** Only for DAI ***/
+
 #IfWinActive Dragon Age: Inquisition
+; #IfWinActive Notepad ; Easy Debug
 
-/* RMB Toggle - freelook; see: http://www.autohotkey.com/board/topic/90938-right-mouse-toggle-help/ */
-toggle_right = 0
-Rbutton::
-toggle_right := !toggle_right
-if(toggle_right = 1) {
-  click, right, down
-} else{
-  click, right, up
-}
-return
-
-/* Shift Toggle - always sprint */
-toggle_shift = 0
-~Shift::
-toggle_shift := !toggle_shift
-if(GetKeyState("Shift", "P"])) {
-  if(toggle_shift = 1) {
-    send, {Shift Down}
-  } else{
-    send, {Shift Up}
+/*
+ *** RMB toggle for freelook ***
+ */
+RButton::
+  toggle_right := !toggle_right
+  if toggle_right
+  {
+    ; ToolTip, "down"
+    Click down right
   }
-}
-return
+  else
+  {
+    ; ToolTip, "up"
+    Click up right
+  }
+Return
+
+/*
+ *** Shift toggle for sprint ***
+ http://www.autohotkey.com/board/topic/41510-is-there-any-way-to-get-shift-to-toggle-like-caps-lock/?p=259395
+ */
+LShift:: Send % "{Blind}{LShift " . ((lshift:=!lshift) ? "Down}" : "Up}")
+
+/*
+ *** Disable the Windows Key ***
+ */
+LWin::
+
+/*
+ *** Right Control toggles Mute ***
+ http://www.autohotkey.com/board/topic/93207-help-me-with-a-scriptmute-and-unmute-microphone/
+ https://github.com/PProvost/AutoHotKey
+ */
+RCtrl::
+  ; Use this script to find your sound source mixer: 
+  ; https://raw.githubusercontent.com/PProvost/AutoHotKey/master/SoundCardAnalysis.ahk
+  mixer = 3
+
+  SoundSet, +1, Microphone, Mute, mixer
+  SoundGet, mute, Microphone, MUTE, mixer
+  if mute = On
+  {
+    soundfile = %A_WinDir%\Media\Windows Hardware Remove.wav
+  }
+  else
+  { 
+    soundfile = %A_WinDir%\Media\Windows Hardware Insert.wav
+  }
+  SoundPlay, %soundfile%
+
+  ; Can't be seen
+  ; TrayTip, ToggleMic, Microphone mute is %mute%, 3
+
 
 #IfWinActive
