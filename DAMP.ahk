@@ -8,12 +8,11 @@ These tweaks should make DAI easier to control.
 What the script does:
 * RMB toggles freelook
 * Shift toggles sprint
-* Mic Toggle (Caveats)
+* Disable Left Windows Key
+* Right Control Toggles Mute for your own Microphone
 
 TODO:
 * Overlays w/ status messages
-* Disable Windows Key
-* Right Control Toggles Mute for your own Microphone
 
 
 See also:
