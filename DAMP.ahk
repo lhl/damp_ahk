@@ -6,10 +6,11 @@ You should map WASD (from WQSE to movement).
 These tweaks should make DAI easier to control.
 
 What the script does:
-* RMB toggles freelook
+* Backspace toggles RMB down/up (freelook)
+  * RMB freelook toggle is commented out by default (used so little it's not worse the hassles w/ targeting)
 * Shift toggles sprint
 * Disable Left Windows Key
-* Right Control Toggles Mute for your own Microphone
+* Right Control Toggles Mute for your own Microphone (See comments on how to assign the proper mixer)
 
 TODO:
 * Overlays w/ status messages
@@ -45,6 +46,7 @@ https://pyahk.readthedocs.org/en/latest/
 
 */
 
+
 #NoEnv                      ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Persistent                 ; Keep the script running until ExitApp is called
 #SingleInstance Force       ; Reload on script relaunch
@@ -57,9 +59,30 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 #IfWinActive Dragon Age: Inquisition
 ; #IfWinActive Notepad ; Easy Debug
 
+
 /*
  *** RMB toggle for freelook ***
  */
+
+Backspace::
+  toggle_right := !toggle_right
+  if toggle_right
+  {
+    ; ToolTip, "down"
+    Click down right
+    SoundPlay, %A_WinDir%\Media\Windows Hardware Insert.wav
+  }
+  else
+  {
+    ; ToolTip, "up"
+    Click up right
+    SoundPlay, %A_WinDir%\Media\Windows Hardware Remove.wav
+  }
+Return
+
+; Uncomment below if you want to toggle w/ the right mouse button
+; This isn't recommended since it makes some things like grenade/aoe targeting harder
+/* 
 RButton::
   toggle_right := !toggle_right
   if toggle_right
@@ -73,17 +96,34 @@ RButton::
     Click up right
   }
 Return
+*/
+
 
 /*
  *** Shift toggle for sprint ***
  http://www.autohotkey.com/board/topic/41510-is-there-any-way-to-get-shift-to-toggle-like-caps-lock/?p=259395
+ ; LShift:: Send % "{Blind}{LShift " . ((lshift:=!lshift) ? "Down}" : "Up}")
  */
-LShift:: Send % "{Blind}{LShift " . ((lshift:=!lshift) ? "Down}" : "Up}")
+LShift::
+  lshift := !lshift
+  if lshift
+  {
+    Send, {Blind}{LShift Down}
+    SoundPlay, %A_WinDir%\Media\Windows Hardware Insert.wav
+  }
+  else
+  {
+    Send, {Blind}{LShift Up}
+    SoundPlay, %A_WinDir%\Media\Windows Hardware Remove.wav
+  }
+Return
+ 
 
 /*
  *** Disable the Windows Key ***
  */
 LWin::
+Return
 
 /*
  *** Right Control toggles Mute ***
@@ -109,6 +149,7 @@ RCtrl::
 
   ; Can't be seen
   ; TrayTip, ToggleMic, Microphone mute is %mute%, 3
+Return
 
 
 #IfWinActive
