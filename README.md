@@ -30,6 +30,10 @@ Overlay
 * http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-games-dx-89-fixed/
 * http://overlay-api.net/
 
+Shift Keys
+http://www.autohotkey.com/board/topic/41510-is-there-any-way-to-get-shift-to-toggle-like-caps-lock/?p=259395
+
+
 Debugging
 http://www.autohotkey.com/board/topic/59612-simple-debug-console-output/
 https://pyahk.readthedocs.org/en/latest/
