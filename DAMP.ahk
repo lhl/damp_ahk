@@ -6,7 +6,7 @@ You should map WASD (from WQSE to movement).
 These tweaks should make DAI easier to control.
 
 What the script does:
-* Backspace or MB4 toggles RMB down/up (freelook)
+* MB4 toggles RMB down/up (freelook)
   * RMB freelook toggle is commented out by default (used so little it's not worse the hassles w/ targeting)
 * Shift toggles sprint
 * Disable Left Windows Key
@@ -64,7 +64,6 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
  *** RMB toggle for freelook ***
  */
 
-Backspace::
 XButton1::
   toggle_right := !toggle_right
   if toggle_right
@@ -121,9 +120,10 @@ Return
  
 
 /*
- *** Disable the Windows Key ***
+ *** Windows Key Maps to Origin Default ***
  */
 LWin::
+  Send +{F1}
 Return
 
 /*
