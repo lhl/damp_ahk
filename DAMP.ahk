@@ -7,42 +7,11 @@ These tweaks should make DAI easier to control.
 
 What the script does:
 * MB4 toggles RMB down/up (freelook)
-  * RMB freelook toggle is commented out by default (used so little it's not worse the hassles w/ targeting)
 * Shift toggles sprint
 * Disable Left Windows Key
 * Right Control Toggles Mute for your own Microphone (See comments on how to assign the proper mixer)
 
-TODO:
-* Overlays w/ status messages
-
-
-See also:
-* http://www.autohotkey.com/docs/Tutorial.htm
-* http://www.autohotkey.com/docs/commands.htm
-* http://www.autohotkey.com/docs/Hotkeys.htm
-* http://www.autohotkey.net/~tidbit/Tutorial/Tutorial.html
-* http://www.autohotkey.com/board/topic/79192-toggle-hold-down-a-key/
-* http://www.autohotkey.com/board/topic/101298-hold-down-key-on-keypress/
-* http://www.autohotkey.com/board/topic/107428-toggling-shift-using-a-single-key/
-* http://www.autohotkey.com/board/topic/72858-mouse-look-toggle-script-can-someone-please-help/
-* http://www.autohotkey.com/board/topic/90695-metro-2033-toggle-aim-hold-right-mouse-button/
-* http://stackoverflow.com/questions/15472404/autohotkey-on-right-mouse-click-get-a-keyboard-button-pressed-as-well
-
-Sound
-* http://www.autohotkey.com/docs/commands/SoundBeep.htm
-* http://www.autohotkey.com/docs/commands/SoundPlay.htm
-* http://www.autohotkey.com/board/topic/36109-setting-microphone-and-stereo-mix-using-soundset-function/
-* http://www.autohotkey.com/docs/commands/SoundSet.htm
-* http://www.autohotkey.com/board/topic/74440-problem-with-soundplay/
-* http://www.autohotkey.com/board/topic/79063-simple-script-that-plays-a-sound-when-button-is-pressed/
-
-Overlay
-* http://www.autohotkey.com/board/topic/42069-lib-gpf-v11c-overlaying-direct3d-games-dx-89-fixed/
-* http://overlay-api.net/
-
-Debugging
-http://www.autohotkey.com/board/topic/59612-simple-debug-console-output/
-https://pyahk.readthedocs.org/en/latest/
+For more info, see: https://github.com/lhl/damp_ahk
 
 */
 
@@ -64,6 +33,7 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
  *** RMB toggle for freelook ***
  */
 
+; MB4
 XButton1::
   toggle_right := !toggle_right
   if toggle_right
@@ -79,24 +49,6 @@ XButton1::
     SoundPlay, %A_WinDir%\Media\Windows Hardware Remove.wav
   }
 Return
-
-; Uncomment below if you want to toggle w/ the right mouse button
-; This isn't recommended since it makes some things like grenade/aoe targeting harder
-/* 
-RButton::
-  toggle_right := !toggle_right
-  if toggle_right
-  {
-    ; ToolTip, "down"
-    Click down right
-  }
-  else
-  {
-    ; ToolTip, "up"
-    Click up right
-  }
-Return
-*/
 
 
 /*
