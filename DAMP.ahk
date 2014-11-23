@@ -7,9 +7,9 @@ These tweaks should make DAI easier to control.
 
 What the script does:
 * MB4 toggles RMB down/up (freelook)
-* Shift toggles sprint
-* Disable Left Windows Key
-* Right Control Toggles Mute for your own Microphone (See comments on how to assign the proper mixer)
+* Caps lock toggles sprint
+* Left Windows key brings up Origin (Shift+F1)
+* Right Control toggles mute for your own microphone (See comments on how to assign the proper mixer)
 
 For more info, see: https://github.com/lhl/damp_ahk
 
@@ -30,13 +30,13 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
 
 /*
- *** RMB toggle for freelook ***
+ *** MB4 to toggle freelook ***
  */
 
 ; MB4
 XButton1::
-  toggle_right := !toggle_right
-  if toggle_right
+  rmb := !rmb
+  if rmb
   {
     ; ToolTip, "down"
     Click down right
@@ -50,26 +50,56 @@ XButton1::
   }
 Return
 
+; RMB will do a little reset dance
+Rbutton::
+  if rmb {
+    rmb := 0
+    Click up right
+  } 
+  Click right
+Return
+
 
 /*
- *** Shift toggle for sprint ***
- http://www.autohotkey.com/board/topic/41510-is-there-any-way-to-get-shift-to-toggle-like-caps-lock/?p=259395
- ; LShift:: Send % "{Blind}{LShift " . ((lshift:=!lshift) ? "Down}" : "Up}")
+ *** Caps lock toggle sprint ***
  */
-LShift::
-  lshift := !lshift
-  if lshift
+
+Capslock::
+  if not GetKeyState("Capslock", "T")
   {
+    lshift := 1
+    SetCapsLockState, on
     Send, {Blind}{LShift Down}
     SoundPlay, %A_WinDir%\Media\Windows Hardware Insert.wav
   }
   else
   {
+    lshift := 0
+    SetCapsLockState, off
     Send, {Blind}{LShift Up}
     SoundPlay, %A_WinDir%\Media\Windows Hardware Remove.wav
   }
 Return
- 
+
+; Shift will reset things, work like normal
+$LShift::
+  if lshift {
+    lshift := 0
+    SetCapsLockState, off
+    Send, {Blind}{LShift Up}
+  } 
+  Send {LShift Down} 
+Return
+
+$LShift Up::
+  if lshift {
+    lshift := 0
+    SetCapsLockState, off
+    Send, {Blind}{LShift Up}
+  } 
+  Send {LShift Up} 
+Return
+
 
 /*
  *** Windows Key Maps to Origin Default ***
