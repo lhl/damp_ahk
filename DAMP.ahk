@@ -51,12 +51,11 @@ XButton1::
 Return
 
 ; RMB will do a little reset dance
-Rbutton::
+~Rbutton::
   if rmb {
     rmb := 0
     Click up right
   } 
-  Click right
 Return
 
 
