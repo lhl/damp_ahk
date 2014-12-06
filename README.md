@@ -38,3 +38,7 @@ Debugging
 http://www.autohotkey.com/board/topic/59612-simple-debug-console-output/
 https://pyahk.readthedocs.org/en/latest/
 
+
+See also:
+* Alternative AHK script
+  * http://forum.bioware.com/topic/524996-guide-pc-controls-fix-ahk/
